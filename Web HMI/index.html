@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Kitchen Inventory Management System</title>
+    <meta name="description" content="KIMS">
+
+    <link rel="icon" href="./images/node-blue.ico">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3f51b5">
+
+    <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.css" />
+    
+    <link rel="stylesheet" href="./index.css" media="all">
+</head>
+<body>
+    <div id="app">
+		<div id="left-side">
+			<ul id="item-list">
+				<li v-for="item in items" v-bind:key="item.upc">
+					<input type="radio" :id="item.upc" :value="item.upc" v-model="selected" onclick="changeSelection(this.id)" />
+					<label :for="item.upc"><div class="item-count" :class="{'under-stock': item.underStock}" >{{item.have}}/{{item.want}}</div>{{ item.name }}</label>
+				</li>
+			</ul>
+		</div>
+		<div id="right-side">
+			<h2>Scan Mode</h2>
+			<div>
+				<input type="radio" class="toggle-button" id="add-button" v-model="scanMode" value="Add" onclick="uibuilder.send({'topic':'ScanMode', 'payload':'Add'})"/>
+				<label for="add-button">Add</label>
+			</div>
+			<div>
+				<input type="radio" class="toggle-button" id="select-button" v-model="scanMode" value="Select" onclick="uibuilder.send({'topic':'ScanMode', 'payload':'Select'})"/>
+				<label for="select-button">Select</label>
+			</div>
+			<div>
+				<input type="radio" class="toggle-button" id="remove-button" v-model="scanMode" value="Remove" onclick="uibuilder.send({'topic':'ScanMode', 'payload':'Remove'})"/>
+				<label for="remove-button">Remove</label>
+			</div>
+			<h2><div>Have</div><div>Want</div></h2>
+			<div>
+				<button class="crement-button" id="increment-current-button" onclick="incrementHave()">+</button>
+				<button class="crement-button" id="increment-target-button" onclick="incrementWant()">+</button>
+			</div>
+			<div>
+				<div id="have-count">{{currentItem.have}}</div>
+				<div id="want-count">{{currentItem.want}}</div>
+			</div>
+			<div>
+				<button class="crement-button" id="decrement-current-button" onclick="decrementHave()">−</button>
+				<button class="crement-button" id="decrement-target-button" onclick="decrementWant()">−</button>
+			</div>
+			<h2>Edit Item</h2>
+			<button id="rename-button" onclick="rename()">Rename</button>
+			<button id="delete-button" onclick="deleteCurrentItem()">Delete</button>
+			<div class="end">
+				<button id="refresh-button" onclick="uibuilder.send({'topic':'Refresh'})">↻</button>
+			</div>
+		</div>
+		<!--
+		<div id="edit-window">
+			<div><label>Name</label><input id="name" :value="currentItem.name" /></div>
+			<div><label>UPC</label><input id="upc" :value="currentItem.upc" /></div>
+			<div><button id="save-button">Save</button><button id="cancel-button">Cancel</button></div>
+		</div>
+		-->
+	</div>
+
+    <!-- These MUST be in the right order. Note no leading / -->
+    <!-- REQUIRED: Socket.IO is loaded only once for all instances
+                     Without this, you don't get a websocket connection -->
+    <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
+
+    <!-- --- Vendor Libraries - Load in the right order --- -->
+    <script src="../uibuilder/vendor/vue/dist/vue.js"></script> <!-- dev version with component compiler -->
+    <!-- <script src="../uibuilder/vendor/vue/dist/vue.min.js"></script>   prod version with component compiler -->
+    <!-- <script src="../uibuilder/vendor/vue/dist/vue.runtime.min.js"></script>   prod version without component compiler -->
+    <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
+
+    <!-- REQUIRED: Sets up Socket listeners and the msg object -->
+    <!-- <script src="./uibuilderfe.js"></script>   //dev version -->
+    <script src="./uibuilderfe.min.js"></script> <!--    //prod version -->
+    <!-- OPTIONAL: You probably want this. Put your custom code here -->
+    <script src="./index.js"></script>
+
+</body>
+
+</html>

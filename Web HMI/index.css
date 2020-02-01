@@ -1,0 +1,144 @@
+/* Cloak elements on initial load to hide the possible display of {{ ... }} 
+ * Add to the app tag or to specific tags
+ * To display "loading...", change to the following:
+ *    [v-cloak] > * { display:none }
+ *    [v-cloak]::before { content: "loading…" }
+ */
+[v-cloak] { display: none; }
+
+/*  Colours for Syntax Highlighted pre's */
+.syntax-highlight {color:white;background-color:black;padding:5px 10px;}
+.syntax-highlight > .key {color:#ffbf35}
+.syntax-highlight > .string {color:#5dff39;}
+.syntax-highlight > .number {color:#70aeff;}
+.syntax-highlight > .boolean {color:#b993ff;}
+
+h2 {
+    color:#999;
+    font-family:"Lucida Console";
+    font-size:24px;
+    text-align:center;
+    margin:20px 0 0;
+    display:flex;
+    justify-content: space-around;
+}
+button {
+    min-width:64px;
+    height:64px;
+    font-size:32px;
+    line-height:1;
+    font-family:"Lucida Console";
+    background-color:#333;
+    color:#999;
+    text-align:center;
+    border:none;
+    margin:8px;
+}
+input[type="radio"]{
+    display:none;
+}
+
+#app {
+    display: flex;
+    background-color:#555;
+    height:1024px;
+    width:600px;
+}
+
+
+#left-side{
+    flex-grow:1;
+    margin:4px 0 4px 4px;
+    display:flex;
+    flex-direction:column;
+}
+
+#item-list {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+#item-list li{
+    margin-bottom:4px;
+    padding:0;
+}
+#item-list li input[type="radio"]+label{
+    background-color:#333;
+    color:#999;
+    padding:10px;
+    margin:0;
+    width:100%;
+}
+#item-list li input[type="radio"]:checked+label{
+    background-color:#36D;
+    color:white;
+}
+
+
+#right-side {
+    display:flex;
+    flex-direction:column;
+    margin:4px;
+}
+.toggle-button+label {
+    width:100%;
+    text-align:center;
+    margin-bottom:4px;
+    padding:16px;
+    background-color:#777;
+    border:none;
+    color:#999;
+    font-size:32px;
+    line-height:1;
+    font-family:"Lucida Console";
+    border:5px #555 solid;
+}
+.toggle-button:checked+label{
+    border-color:#36D;
+    color:white;
+}
+#add-button:checked+label {
+    background-color:#393;
+}
+#select-button:checked+label {
+    background-color:#339;
+}
+#remove-button:checked+label {
+    background-color:#933;
+}
+#right-side div {
+    display:flex;
+    justify-content:space-around;
+}
+
+#right-side>div>div{
+    width:64px;
+    text-align:center;
+    font-size:64px;
+    font-family:"Lucida Console";
+    line-height:1;
+    color:#999;
+    margin:4px 0 -4px;
+}
+#right-side>div>button.crement-button {
+    font-size:64px;
+}
+
+.item-count {
+    float:left;
+    margin:-6px 4px -6px -6px;
+    padding:10px;
+    line-height:1;
+    font-size:20px;
+    border-radius:22px;
+    font-family:"Lucida Console";
+}
+
+.item-count.under-stock {
+    background-color:#A40;
+}
+
+.end {
+    flex-grow:1;
+    align-items:flex-end;
+}
