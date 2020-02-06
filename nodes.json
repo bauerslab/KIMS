@@ -1,1240 +1,1248 @@
 [
-	{
-		"id": "d612f1de.347908",
-		"type": "tab",
-		"label": "Main",
-		"disabled": false,
-		"info": ""
-	},
-	{
-		"id": "4f90e2dc.c3a1cc",
-		"type": "tab",
-		"label": "Web Lookup",
-		"disabled": false,
-		"info": ""
-	},
-	{
-		"id": "48e1deaa.d8a22",
-		"type": "tab",
-		"label": "TodoistAPI",
-		"disabled": false,
-		"info": ""
-	},
-	{
-		"id": "2a6819dd.47b4ae",
-		"type": "MySQLdatabase",
-		"z": "",
-		"host": "",
-		"port": "",
-		"db": "",
-		"tz": ""
-	},
-	{
-		"id": "82e07b51.0ee9d8",
-		"type": "link in",
-		"z": "48e1deaa.d8a22",
-		"name": "GetAll",
-		"links": [],
-		"x": 155,
-		"y": 100,
-		"wires": [
-			[
-				"867ba119.e8425"
-			]
-		]
-	},
-	{
-		"id": "2c79eb68.694934",
-		"type": "link in",
-		"z": "48e1deaa.d8a22",
-		"name": "Create",
-		"links": [
-			"bc8ba741.f831b8"
-		],
-		"x": 155,
-		"y": 140,
-		"wires": [
-			[
-				"8ae6dbfb.5cc838"
-			]
-		]
-	},
-	{
-		"id": "7ebdfd25.0943a4",
-		"type": "link in",
-		"z": "48e1deaa.d8a22",
-		"name": "Update",
-		"links": [],
-		"x": 155,
-		"y": 180,
-		"wires": [
-			[
-				"6c4d1734.15ecf8"
-			]
-		]
-	},
-	{
-		"id": "a9e9337c.62ee5",
-		"type": "link in",
-		"z": "48e1deaa.d8a22",
-		"name": "Reopen",
-		"links": [
-			"89ade8f7.d51b38"
-		],
-		"x": 155,
-		"y": 220,
-		"wires": [
-			[
-				"11199783.267a48"
-			]
-		]
-	},
-	{
-		"id": "47133cc.cdb69c4",
-		"type": "http request",
-		"z": "48e1deaa.d8a22",
-		"name": "Create",
-		"method": "POST",
-		"ret": "obj",
-		"paytoqs": false,
-		"url": "https:\/\/api.todoist.com\/rest\/v1\/tasks",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "bearer",
-		"x": 370,
-		"y": 140,
-		"wires": [
-			[
-				"e38a1bb6.c40ab8"
-			]
-		]
-	},
-	{
-		"id": "8ae6dbfb.5cc838",
-		"type": "function",
-		"z": "48e1deaa.d8a22",
-		"name": "",
-		"func": "msg.headers = {};\nmsg.headers['Content-Type'] = 'application\/json';\nmsg.payload['project_id'] = 0;\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 250,
-		"y": 140,
-		"wires": [
-			[
-				"47133cc.cdb69c4"
-			]
-		]
-	},
-	{
-		"id": "21ddb658.956d8a",
-		"type": "link out",
-		"z": "48e1deaa.d8a22",
-		"name": "GetAll",
-		"links": [],
-		"x": 475,
-		"y": 100,
-		"wires": []
-	},
-	{
-		"id": "e38a1bb6.c40ab8",
-		"type": "link out",
-		"z": "48e1deaa.d8a22",
-		"name": "CreateTask",
-		"links": [
-			"fd43e916.25322"
-		],
-		"x": 475,
-		"y": 140,
-		"wires": []
-	},
-	{
-		"id": "4aeb0806.eacd28",
-		"type": "link out",
-		"z": "48e1deaa.d8a22",
-		"name": "EditTask",
-		"links": [],
-		"x": 475,
-		"y": 180,
-		"wires": []
-	},
-	{
-		"id": "ca3374c6.da3428",
-		"type": "link out",
-		"z": "48e1deaa.d8a22",
-		"name": "Reopen",
-		"links": [],
-		"x": 475,
-		"y": 220,
-		"wires": []
-	},
-	{
-		"id": "444018a9.e78c08",
-		"type": "http request",
-		"z": "48e1deaa.d8a22",
-		"name": "GetAll",
-		"method": "GET",
-		"ret": "obj",
-		"paytoqs": true,
-		"url": "https:\/\/api.todoist.com\/rest\/v1\/tasks",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "bearer",
-		"x": 370,
-		"y": 100,
-		"wires": [
-			[
-				"21ddb658.956d8a"
-			]
-		]
-	},
-	{
-		"id": "867ba119.e8425",
-		"type": "function",
-		"z": "48e1deaa.d8a22",
-		"name": "",
-		"func": "msg.payload = {};\nmsg.payload['project_id'] = 0;\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application\/json';\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 250,
-		"y": 100,
-		"wires": [
-			[
-				"444018a9.e78c08"
-			]
-		]
-	},
-	{
-		"id": "6c4d1734.15ecf8",
-		"type": "function",
-		"z": "48e1deaa.d8a22",
-		"name": "",
-		"func": "msg.url = \"https:\/\/api.todoist.com\/rest\/v1\/tasks\/\"+msg.topic\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application\/json';\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 250,
-		"y": 180,
-		"wires": [
-			[
-				"1ba6bcb2.eb56a3"
-			]
-		]
-	},
-	{
-		"id": "1ba6bcb2.eb56a3",
-		"type": "http request",
-		"z": "48e1deaa.d8a22",
-		"name": "Update",
-		"method": "POST",
-		"ret": "obj",
-		"paytoqs": false,
-		"url": "",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "bearer",
-		"x": 380,
-		"y": 180,
-		"wires": [
-			[
-				"4aeb0806.eacd28"
-			]
-		]
-	},
-	{
-		"id": "11199783.267a48",
-		"type": "function",
-		"z": "48e1deaa.d8a22",
-		"name": "",
-		"func": "msg.url = \"https:\/\/api.todoist.com\/rest\/v1\/tasks\/\"+msg.topic+\"\/reopen\"\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 250,
-		"y": 220,
-		"wires": [
-			[
-				"178111ee.c9e60e"
-			]
-		]
-	},
-	{
-		"id": "178111ee.c9e60e",
-		"type": "http request",
-		"z": "48e1deaa.d8a22",
-		"name": "Reopen",
-		"method": "POST",
-		"ret": "obj",
-		"paytoqs": false,
-		"url": "",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "bearer",
-		"x": 380,
-		"y": 220,
-		"wires": [
-			[
-				"ca3374c6.da3428"
-			]
-		]
-	},
-	{
-		"id": "824db7b6.614e78",
-		"type": "mysql",
-		"z": "d612f1de.347908",
-		"mydb": "2a6819dd.47b4ae",
-		"name": "Database",
-		"x": 1780,
-		"y": 600,
-		"wires": [
-			[
-				"89deae90.4b4d7"
-			]
-		]
-	},
-	{
-		"id": "954e463a.8a72b8",
-		"type": "link out",
-		"z": "d612f1de.347908",
-		"name": "Lookup UPC",
-		"links": [
-			"fef5de26.c65ec",
-			"2630bd47.64ba1a"
-		],
-		"x": 1095,
-		"y": 380,
-		"wires": []
-	},
-	{
-		"id": "43c3f87d.4faad8",
-		"type": "link in",
-		"z": "d612f1de.347908",
-		"name": "Lookup Success",
-		"links": [
-			"14dd4a41.9d0d06",
-			"928955a6.8f6cb8",
-			"526a5ce1.cddeac"
-		],
-		"x": 1295,
-		"y": 440,
-		"wires": [
-			[
-				"1a70d933.62f9af"
-			]
-		]
-	},
-	{
-		"id": "a9cffb94.f5064",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Check DB For UPC",
-		"func": "var found = false;\nvar items = global.get(\"Items\");\nfor (i = 0; i < items.length; i++) {\n  if (items[i].upc == msg.payload)\n  {\n\tfound = true;\n\tmsg.topic = \"Select\";\n\tbreak;\n  }\n}\n\nif (found)\n\treturn [null, msg];\nelse\n{\n\tglobal.set(\"Name\", null);\n\tglobal.set(\"Size\", null);\n\treturn [msg, null];\n}",
-		"outputs": 2,
-		"noerr": 0,
-		"x": 950,
-		"y": 400,
-		"wires": [
-			[
-				"954e463a.8a72b8"
-			],
-			[
-				"b3f7cf89.fd4cc8"
-			]
-		]
-	},
-	{
-		"id": "79b2211d.dd6038",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Get",
-		"func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nmsg.queryType=\"Get Item\";\nmsg.topic = SqlString.format(\"SELECT upc, name, have, want, task FROM Items WHERE upc = ?\", [msg.payload]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1410,
-		"y": 680,
-		"wires": [
-			[
-				"824db7b6.614e78"
-			]
-		]
-	},
-	{
-		"id": "1a70d933.62f9af",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Add New",
-		"func": "var success = msg.payload;\nvar SqlString = global.get('SqlString');\n\nmsg.queryType = \"Add New Item\";\nmsg.topic = SqlString.format(\n\t\"INSERT INTO Items(name, upc, have, want) VALUES (?, ?, ?, 0)\",\n\t[\n\t\tsuccess === true ? global.get(\"Name\") : \"Unknown Item\",\n\t\tglobal.get(\"UPC\"),\n\t\tglobal.get(\"ScanMode\") === \"Add\" ? 1 : 0\n\t]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1420,
-		"y": 440,
-		"wires": [
-			[
-				"824db7b6.614e78"
-			]
-		]
-	},
-	{
-		"id": "b3f7cf89.fd4cc8",
-		"type": "switch",
-		"z": "d612f1de.347908",
-		"name": "Scan Mode",
-		"property": "ScanMode",
-		"propertyType": "global",
-		"rules": [
-			{
-				"t": "eq",
-				"v": "Add",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Remove",
-				"vt": "str"
-			},
-			{
-				"t": "else"
-			}
-		],
-		"checkall": "true",
-		"repair": false,
-		"outputs": 3,
-		"x": 1150,
-		"y": 440,
-		"wires": [
-			[
-				"7d21b8e6.0ba86"
-			],
-			[
-				"90080b59.aee8c8"
-			],
-			[
-				"79b2211d.dd6038"
-			]
-		]
-	},
-	{
-		"id": "847a5f20.a4a81",
-		"type": "uibuilder",
-		"z": "d612f1de.347908",
-		"name": "Web HMI",
-		"topic": "",
-		"url": "hmi",
-		"fwdInMessages": false,
-		"allowScripts": false,
-		"allowStyles": false,
-		"copyIndex": true,
-		"showfolder": false,
-		"x": 710,
-		"y": 580,
-		"wires": [
-			[
-				"164dc4cc.565c03"
-			],
-			[]
-		]
-	},
-	{
-		"id": "164dc4cc.565c03",
-		"type": "switch",
-		"z": "d612f1de.347908",
-		"name": "Event Type",
-		"property": "topic",
-		"propertyType": "msg",
-		"rules": [
-			{
-				"t": "eq",
-				"v": "ScanUPC",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Refresh",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "IncrementHave",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "DecrementHave",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "IncrementWant",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "DecrementWant",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "SelectUPC",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Rename",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Delete",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "ScanMode",
-				"vt": "str"
-			}
-		],
-		"checkall": "true",
-		"repair": false,
-		"outputs": 10,
-		"x": 870,
-		"y": 580,
-		"wires": [
-			[
-				"a9cffb94.f5064"
-			],
-			[
-				"a55f63af.b0429"
-			],
-			[
-				"7d21b8e6.0ba86"
-			],
-			[
-				"90080b59.aee8c8"
-			],
-			[
-				"bb7279d.ae91f08"
-			],
-			[
-				"ae6a9e10.436dc"
-			],
-			[
-				"79b2211d.dd6038"
-			],
-			[
-				"6ddce41c.6e92f4"
-			],
-			[
-				"5824b86a.8ad43"
-			],
-			[
-				"fbbad6f9.866288"
-			]
-		]
-	},
-	{
-		"id": "e1e516b4.c81cf8",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Replace Item List",
-		"func": "\/\/save data\nglobal.set(\"Items\", msg.payload);\n\nmsg.topic = \"Item List\";\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 530,
-		"y": 520,
-		"wires": [
-			[
-				"847a5f20.a4a81"
-			]
-		]
-	},
-	{
-		"id": "df42208e.6fc2f8",
-		"type": "switch",
-		"z": "d612f1de.347908",
-		"name": "",
-		"property": "queryType",
-		"propertyType": "msg",
-		"rules": [
-			{
-				"t": "eq",
-				"v": "Get All",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Add New Item",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Get Item",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Delete Item",
-				"vt": "str"
-			},
-			{
-				"t": "eq",
-				"v": "Update Item",
-				"vt": "str"
-			}
-		],
-		"checkall": "true",
-		"repair": false,
-		"outputs": 5,
-		"x": 230,
-		"y": 600,
-		"wires": [
-			[
-				"e1e516b4.c81cf8"
-			],
-			[
-				"3d8c5665.d0d452"
-			],
-			[
-				"7f929786.8fdda8"
-			],
-			[
-				"2c8857cd.4d3e58"
-			],
-			[
-				"d3786e91.2642f8"
-			]
-		]
-	},
-	{
-		"id": "3d8c5665.d0d452",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Add New Item To UI",
-		"func": "var items = global.get(\"Items\");\nvar item = {name:global.get(\"Name\") || \"Unknown Item\", upc:global.get(\"UPC\"), have:global.get(\"ScanMode\") === \"Add\" ? 1 : 0, want:0};\nitems.push(item);\nmsg.topic = \"Add New Item\";\nmsg.payload = item;\n\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 530,
-		"y": 560,
-		"wires": [
-			[
-				"847a5f20.a4a81"
-			]
-		]
-	},
-	{
-		"id": "a55f63af.b0429",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Get All",
-		"func": "msg.queryType=\"Get All\";\nmsg.topic=\"SELECT upc, name, have, want, task FROM Items\";\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1410,
-		"y": 480,
-		"wires": [
-			[
-				"824db7b6.614e78"
-			]
-		]
-	},
-	{
-		"id": "fbbad6f9.866288",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Set Scan Mode",
-		"func": "global.set(\"ScanMode\", msg.payload);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 960,
-		"y": 700,
-		"wires": [
-			[]
-		]
-	},
-	{
-		"id": "6ddce41c.6e92f4",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Rename",
-		"func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload.upc);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].name = msg.payload.name;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET name = ? WHERE upc = ?\", [msg.payload.name, msg.payload.upc]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1420,
-		"y": 720,
-		"wires": [
-			[
-				"824db7b6.614e78"
-			]
-		]
-	},
-	{
-		"id": "7f929786.8fdda8",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Update Item In UI",
-		"func": "msg.topic = \"Update Item\";\nmsg.payload = msg.payload[0];\/\/Select the first row (should only be one anyway)\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i] = msg.payload;\n\t\tbreak;\n\t}\n}\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 530,
-		"y": 600,
-		"wires": [
-			[
-				"847a5f20.a4a81"
-			]
-		]
-	},
-	{
-		"id": "7d21b8e6.0ba86",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Increment Have",
-		"func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].have++;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET have = have + 1 WHERE upc = ?\", [msg.payload]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1440,
-		"y": 520,
-		"wires": [
-			[
-				"824db7b6.614e78",
-				"bfc3ac52.889908"
-			]
-		]
-	},
-	{
-		"id": "90080b59.aee8c8",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Decrement Have",
-		"func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].have--;\n\t\tif (items[i].have < 0)\n\t\t\titems[i].have = 0;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET have = CASE WHEN have - 1 < 0 THEN 0 ELSE have - 1 END WHERE upc = ?\", [msg.payload]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1450,
-		"y": 560,
-		"wires": [
-			[
-				"824db7b6.614e78",
-				"bfc3ac52.889908"
-			]
-		]
-	},
-	{
-		"id": "bb7279d.ae91f08",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Increment Want",
-		"func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].want++;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET want = want + 1 WHERE upc = ?\", [msg.payload]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1440,
-		"y": 600,
-		"wires": [
-			[
-				"824db7b6.614e78",
-				"bfc3ac52.889908"
-			]
-		]
-	},
-	{
-		"id": "ae6a9e10.436dc",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Decrement Want",
-		"func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].want--;\n\t\tif (items[i].want < 0)\n\t\t\titems[i].want = 0;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET want = CASE WHEN want - 1 < 0 THEN 0 ELSE want - 1 END WHERE upc = ?\", [msg.payload]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1450,
-		"y": 640,
-		"wires": [
-			[
-				"824db7b6.614e78",
-				"bfc3ac52.889908"
-			]
-		]
-	},
-	{
-		"id": "d3786e91.2642f8",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Get Updated Item",
-		"func": "msg.payload = global.get(\"UPC\");\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 950,
-		"y": 780,
-		"wires": [
-			[
-				"79b2211d.dd6038"
-			]
-		]
-	},
-	{
-		"id": "5824b86a.8ad43",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Delete",
-		"func": "var SqlString = global.get('SqlString');\nvar upc = msg.payload;\nglobal.set(\"UPC\", upc);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\tmsg.payload = items[i].task;\n\t\tbreak;\n\t}\n}\n\nglobal.set(\"Items\", items.filter(function(i) { return i.upc !== msg.payload; }));\n\nmsg.queryType=\"Delete Item\";\nmsg.topic = SqlString.format(\"DELETE FROM Items WHERE upc = ?\", [upc]);\n\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1410,
-		"y": 760,
-		"wires": [
-			[
-				"824db7b6.614e78",
-				"39ad0def.6fca22"
-			]
-		]
-	},
-	{
-		"id": "2c8857cd.4d3e58",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Delete Item From UI",
-		"func": "msg.topic = \"Delete Item\";\nmsg.payload = global.get(\"UPC\");\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 520,
-		"y": 640,
-		"wires": [
-			[
-				"847a5f20.a4a81"
-			]
-		]
-	},
-	{
-		"id": "326f5bf4.b5ffac",
-		"type": "html",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Separate Columns",
-		"property": "payload",
-		"outproperty": "payload",
-		"tag": "td",
-		"ret": "text",
-		"as": "single",
-		"x": 750,
-		"y": 200,
-		"wires": [
-			[
-				"cab43b9e.6ae7b8"
-			]
-		]
-	},
-	{
-		"id": "4fb7fec3.ebd6f",
-		"type": "html",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Get Rows",
-		"property": "payload",
-		"outproperty": "payload",
-		"tag": "table.data tr",
-		"ret": "html",
-		"as": "multi",
-		"x": 580,
-		"y": 200,
-		"wires": [
-			[
-				"326f5bf4.b5ffac"
-			]
-		]
-	},
-	{
-		"id": "256c88d1.6974e",
-		"type": "http request",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "upcdatabase.com",
-		"method": "GET",
-		"ret": "txt",
-		"paytoqs": false,
-		"url": "",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "",
-		"x": 370,
-		"y": 80,
-		"wires": [
-			[
-				"b47741b.a8228c"
-			]
-		]
-	},
-	{
-		"id": "351f9542.9e9a42",
-		"type": "function",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Construct URL",
-		"func": "msg.url = \"https:\/\/upcdatabase.com\/item\/\" + msg.payload;\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 220,
-		"y": 140,
-		"wires": [
-			[
-				"256c88d1.6974e"
-			]
-		]
-	},
-	{
-		"id": "2630bd47.64ba1a",
-		"type": "link in",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "UPC",
-		"links": [
-			"954e463a.8a72b8"
-		],
-		"x": 95,
-		"y": 140,
-		"wires": [
-			[
-				"351f9542.9e9a42"
-			]
-		]
-	},
-	{
-		"id": "526a5ce1.cddeac",
-		"type": "link out",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Success",
-		"links": [
-			"43c3f87d.4faad8"
-		],
-		"x": 1275,
-		"y": 100,
-		"wires": []
-	},
-	{
-		"id": "cab43b9e.6ae7b8",
-		"type": "function",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Parse",
-		"func": "if(msg.payload[0] == \"Description\")\n\tglobal.set(\"Name\", msg.payload[2]);\nif(msg.payload[0] == \"Size\/Weight\")\n\tglobal.set(\"Size\", msg.payload[2]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 910,
-		"y": 200,
-		"wires": [
-			[
-				"e6619173.c54c"
-			]
-		]
-	},
-	{
-		"id": "e6619173.c54c",
-		"type": "join",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Wait",
-		"mode": "custom",
-		"build": "string",
-		"property": "payload",
-		"propertyType": "msg",
-		"key": "topic",
-		"joiner": "",
-		"joinerType": "str",
-		"accumulate": false,
-		"timeout": "1",
-		"count": "",
-		"reduceRight": false,
-		"reduceExp": "",
-		"reduceInit": "",
-		"reduceInitType": "",
-		"reduceFixup": "",
-		"x": 1030,
-		"y": 200,
-		"wires": [
-			[
-				"79c10c5f.601a5c"
-			]
-		]
-	},
-	{
-		"id": "b47741b.a8228c",
-		"type": "function",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Check for Error",
-		"func": "if (msg.responseUrl.includes(\"upcerror\") || msg.responseUrl.includes(\"itemnotfound\"))\n{\n\tmsg.payload = false;\n\treturn [msg, null];\n}\nelse\n\treturn [null, msg];",
-		"outputs": 2,
-		"noerr": 0,
-		"x": 520,
-		"y": 140,
-		"wires": [
-			[
-				"526a5ce1.cddeac"
-			],
-			[
-				"4fb7fec3.ebd6f"
-			]
-		]
-	},
-	{
-		"id": "79c10c5f.601a5c",
-		"type": "function",
-		"z": "4f90e2dc.c3a1cc",
-		"name": "Check Fields",
-		"func": "if (global.get(\"Name\") && global.get(\"Size\"))\n\tmsg.payload = true;\nelse\n\tmsg.payload = false;\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1170,
-		"y": 200,
-		"wires": [
-			[
-				"526a5ce1.cddeac"
-			]
-		]
-	},
-	{
-		"id": "bfc3ac52.889908",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Check modified item to see if it needs todoist task",
-		"func": "var items = global.get(\"Items\");\nvar upc = global.get(\"UPC\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === upc)\n\t{\n\t\tif (items[i].task)\n\t\t{\n\t\t\tif (items[i].want > items[i].have)\n\t\t\t{\n\t\t\t\tif (items[i].open)\n\t\t\t\t{\n\t\t\t\t\t\/\/already open\n\t\t\t\t\treturn[null,null,null];\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\t\/\/reopen\n\t\t\t\t\tmsg.payload = items[i].task;\n\t\t\t\t\titems[i].open = true;\n\t\t\t\t\treturn[null,msg,null];\n\t\t\t\t}\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\tif (items[i].open)\n\t\t\t\t{\n\t\t\t\t\t\/\/close\n\t\t\t\t\tmsg.payload = items[i].task;\n\t\t\t\t\titems[i].open = false;\n\t\t\t\t\treturn[null,null,msg];\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\t\/\/already closed\n\t\t\t\t\treturn[null,null,null];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\telse\n\t\t{\n\t\t\tif (items[i].want > items[i].have)\n\t\t\t{\n\t\t\t\t\/\/create new task\n\t\t\t\titems[i].open = true;\n\t\t\t\tmsg.payload = {};\n\t\t\t\tmsg.payload.content = items[i].name;\n\t\t\t\treturn[msg,null,null];\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\t\/\/doesn't need a task\n\t\t\t\treturn[null,null,null];\n\t\t\t}\n\t\t}\n\t\tbreak;\n\t}\n}\n\nreturn [null,null,null];",
-		"outputs": 3,
-		"noerr": 0,
-		"x": 1890,
-		"y": 480,
-		"wires": [
-			[
-				"bc8ba741.f831b8"
-			],
-			[
-				"89ade8f7.d51b38"
-			],
-			[
-				"128cffca.fbc378"
-			]
-		]
-	},
-	{
-		"id": "bc8ba741.f831b8",
-		"type": "link out",
-		"z": "d612f1de.347908",
-		"name": "CreateTodoistTask",
-		"links": [
-			"2c79eb68.694934"
-		],
-		"x": 2135,
-		"y": 440,
-		"wires": []
-	},
-	{
-		"id": "89ade8f7.d51b38",
-		"type": "link out",
-		"z": "d612f1de.347908",
-		"name": "ReopenTodoistTask",
-		"links": [
-			"a9e9337c.62ee5"
-		],
-		"x": 2135,
-		"y": 480,
-		"wires": []
-	},
-	{
-		"id": "fd43e916.25322",
-		"type": "link in",
-		"z": "d612f1de.347908",
-		"name": "CreatedTodoistTask",
-		"links": [
-			"e38a1bb6.c40ab8"
-		],
-		"x": 1275,
-		"y": 800,
-		"wires": [
-			[
-				"b3b50725.6c3268"
-			]
-		]
-	},
-	{
-		"id": "b3b50725.6c3268",
-		"type": "function",
-		"z": "d612f1de.347908",
-		"name": "Setup Set Task",
-		"func": "var SqlString = global.get('SqlString');\nvar upc = global.get(\"UPC\");\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === upc)\n\t{\n\t\titems[i].task = msg.payload.id;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET task = ? WHERE upc = ?\", [msg.payload.id, upc]);\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 1420,
-		"y": 800,
-		"wires": [
-			[
-				"824db7b6.614e78"
-			]
-		]
-	},
-	{
-		"id": "128cffca.fbc378",
-		"type": "link out",
-		"z": "d612f1de.347908",
-		"name": "CloseTodoistTask",
-		"links": [
-			"eecae39.39005a"
-		],
-		"x": 2135,
-		"y": 520,
-		"wires": []
-	},
-	{
-		"id": "89deae90.4b4d7",
-		"type": "link out",
-		"z": "d612f1de.347908",
-		"name": "DBOut",
-		"links": [
-			"85e63da6.bd601"
-		],
-		"x": 1895,
-		"y": 600,
-		"wires": []
-	},
-	{
-		"id": "85e63da6.bd601",
-		"type": "link in",
-		"z": "d612f1de.347908",
-		"name": "FromDB",
-		"links": [
-			"89deae90.4b4d7"
-		],
-		"x": 115,
-		"y": 600,
-		"wires": [
-			[
-				"df42208e.6fc2f8"
-			]
-		]
-	},
-	{
-		"id": "eecae39.39005a",
-		"type": "link in",
-		"z": "48e1deaa.d8a22",
-		"name": "Close",
-		"links": [
-			"128cffca.fbc378"
-		],
-		"x": 155,
-		"y": 260,
-		"wires": [
-			[
-				"75655f01.671af8"
-			]
-		]
-	},
-	{
-		"id": "60477859.78c7f8",
-		"type": "link out",
-		"z": "48e1deaa.d8a22",
-		"name": "Close",
-		"links": [],
-		"x": 475,
-		"y": 260,
-		"wires": []
-	},
-	{
-		"id": "75655f01.671af8",
-		"type": "function",
-		"z": "48e1deaa.d8a22",
-		"name": "",
-		"func": "msg.url = \"https:\/\/api.todoist.com\/rest\/v1\/tasks\/\"+msg.topic+\"\/close\"\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 250,
-		"y": 260,
-		"wires": [
-			[
-				"41494549.d934f4"
-			]
-		]
-	},
-	{
-		"id": "41494549.d934f4",
-		"type": "http request",
-		"z": "48e1deaa.d8a22",
-		"name": "Close",
-		"method": "POST",
-		"ret": "obj",
-		"paytoqs": false,
-		"url": "",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "bearer",
-		"x": 370,
-		"y": 260,
-		"wires": [
-			[
-				"60477859.78c7f8"
-			]
-		]
-	},
-	{
-		"id": "3fe2cbdb.0c9334",
-		"type": "link in",
-		"z": "48e1deaa.d8a22",
-		"name": "Delete",
-		"links": [
-			"39ad0def.6fca22"
-		],
-		"x": 155,
-		"y": 300,
-		"wires": [
-			[
-				"96822929.58c8d"
-			]
-		]
-	},
-	{
-		"id": "b98bfd15.12a0e8",
-		"type": "link out",
-		"z": "48e1deaa.d8a22",
-		"name": "Delete",
-		"links": [],
-		"x": 475,
-		"y": 300,
-		"wires": []
-	},
-	{
-		"id": "96822929.58c8d",
-		"type": "function",
-		"z": "48e1deaa.d8a22",
-		"name": "",
-		"func": "msg.url = \"https:\/\/api.todoist.com\/rest\/v1\/tasks\/\"+msg.payload\nreturn msg;",
-		"outputs": 1,
-		"noerr": 0,
-		"x": 250,
-		"y": 300,
-		"wires": [
-			[
-				"6655c9aa.0668"
-			]
-		]
-	},
-	{
-		"id": "6655c9aa.0668",
-		"type": "http request",
-		"z": "48e1deaa.d8a22",
-		"name": "Delete",
-		"method": "DELETE",
-		"ret": "obj",
-		"paytoqs": false,
-		"url": "",
-		"tls": "",
-		"persist": false,
-		"proxy": "",
-		"authType": "bearer",
-		"x": 370,
-		"y": 300,
-		"wires": [
-			[
-				"b98bfd15.12a0e8"
-			]
-		]
-	},
-	{
-		"id": "39ad0def.6fca22",
-		"type": "link out",
-		"z": "d612f1de.347908",
-		"name": "DeleteTask",
-		"links": [
-			"3fe2cbdb.0c9334"
-		],
-		"x": 1595,
-		"y": 760,
-		"wires": []
-	}
+    {
+        "id": "8c23e2f4.97027",
+        "type": "tab",
+        "label": "Main",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b3478ec1.732918",
+        "type": "tab",
+        "label": "Web Lookup",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8d58cb0a.3ef3",
+        "type": "tab",
+        "label": "TodoistAPI",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3c75a587.22e77a",
+        "type": "MySQLdatabase",
+        "z": "",
+        "host": "",
+        "port": "",
+        "db": "",
+        "tz": ""
+    },
+    {
+        "id": "9fa65258.9928f8",
+        "type": "MySQLdatabase",
+        "z": "",
+        "host": "diskstation",
+        "port": "3307",
+        "db": "KIMS",
+        "tz": ""
+    },
+    {
+        "id": "35bf3143.af301e",
+        "type": "link in",
+        "z": "8d58cb0a.3ef3",
+        "name": "GetAll",
+        "links": [],
+        "x": 155,
+        "y": 100,
+        "wires": [
+            [
+                "59d171b2.a9adf8"
+            ]
+        ]
+    },
+    {
+        "id": "b9d7b372.d761b",
+        "type": "link in",
+        "z": "8d58cb0a.3ef3",
+        "name": "Create",
+        "links": [
+            "5044294f.c8767"
+        ],
+        "x": 155,
+        "y": 140,
+        "wires": [
+            [
+                "2a5fa956.9c141e"
+            ]
+        ]
+    },
+    {
+        "id": "22d82734.818ee",
+        "type": "link in",
+        "z": "8d58cb0a.3ef3",
+        "name": "Update",
+        "links": [],
+        "x": 155,
+        "y": 180,
+        "wires": [
+            [
+                "60eca619.965b1"
+            ]
+        ]
+    },
+    {
+        "id": "409ac839.3916f",
+        "type": "link in",
+        "z": "8d58cb0a.3ef3",
+        "name": "Reopen",
+        "links": [
+            "8e7615c0.d68158"
+        ],
+        "x": 155,
+        "y": 220,
+        "wires": [
+            [
+                "20394b86.d91b6c"
+            ]
+        ]
+    },
+    {
+        "id": "9726e3cd.5f2478",
+        "type": "http request",
+        "z": "8d58cb0a.3ef3",
+        "name": "Create",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "https://api.todoist.com/rest/v1/tasks",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "c42eee5e.ad082"
+            ]
+        ]
+    },
+    {
+        "id": "2a5fa956.9c141e",
+        "type": "function",
+        "z": "8d58cb0a.3ef3",
+        "name": "",
+        "func": "msg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload['project_id'] = 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "9726e3cd.5f2478"
+            ]
+        ]
+    },
+    {
+        "id": "7af8ed54.f18574",
+        "type": "link out",
+        "z": "8d58cb0a.3ef3",
+        "name": "GetAll",
+        "links": [],
+        "x": 475,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c42eee5e.ad082",
+        "type": "link out",
+        "z": "8d58cb0a.3ef3",
+        "name": "CreateTask",
+        "links": [
+            "f5aec266.950a4"
+        ],
+        "x": 475,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a1f7862c.05659",
+        "type": "link out",
+        "z": "8d58cb0a.3ef3",
+        "name": "EditTask",
+        "links": [],
+        "x": 475,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fbf695d8.a386f",
+        "type": "link out",
+        "z": "8d58cb0a.3ef3",
+        "name": "Reopen",
+        "links": [],
+        "x": 475,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6c82b6e6.ab8de",
+        "type": "http request",
+        "z": "8d58cb0a.3ef3",
+        "name": "GetAll",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": true,
+        "url": "https://api.todoist.com/rest/v1/tasks",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "7af8ed54.f18574"
+            ]
+        ]
+    },
+    {
+        "id": "59d171b2.a9adf8",
+        "type": "function",
+        "z": "8d58cb0a.3ef3",
+        "name": "",
+        "func": "msg.payload = {};\nmsg.payload['project_id'] = 0;\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 100,
+        "wires": [
+            [
+                "6c82b6e6.ab8de"
+            ]
+        ]
+    },
+    {
+        "id": "60eca619.965b1",
+        "type": "function",
+        "z": "8d58cb0a.3ef3",
+        "name": "",
+        "func": "msg.url = \"https://api.todoist.com/rest/v1/tasks/\"+msg.topic\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "73d33554.ab7984"
+            ]
+        ]
+    },
+    {
+        "id": "73d33554.ab7984",
+        "type": "http request",
+        "z": "8d58cb0a.3ef3",
+        "name": "Update",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "a1f7862c.05659"
+            ]
+        ]
+    },
+    {
+        "id": "20394b86.d91b6c",
+        "type": "function",
+        "z": "8d58cb0a.3ef3",
+        "name": "",
+        "func": "msg.url = \"https://api.todoist.com/rest/v1/tasks/\"+msg.topic+\"/reopen\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "be0eb82b.fbc9"
+            ]
+        ]
+    },
+    {
+        "id": "be0eb82b.fbc9",
+        "type": "http request",
+        "z": "8d58cb0a.3ef3",
+        "name": "Reopen",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "fbf695d8.a386f"
+            ]
+        ]
+    },
+    {
+        "id": "59d8440c.042684",
+        "type": "mysql",
+        "z": "8c23e2f4.97027",
+        "mydb": "9fa65258.9928f8",
+        "name": "Database",
+        "x": 1780,
+        "y": 600,
+        "wires": [
+            [
+                "f24b6423.5453d8"
+            ]
+        ]
+    },
+    {
+        "id": "b2143b5d.ee1698",
+        "type": "link out",
+        "z": "8c23e2f4.97027",
+        "name": "Lookup UPC",
+        "links": [
+            "fef5de26.c65ec",
+            "51712f49.9a97"
+        ],
+        "x": 1095,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2d523e31.4d9c3a",
+        "type": "link in",
+        "z": "8c23e2f4.97027",
+        "name": "Lookup Success",
+        "links": [
+            "14dd4a41.9d0d06",
+            "928955a6.8f6cb8",
+            "42bfd3b6.9c4e74"
+        ],
+        "x": 1295,
+        "y": 440,
+        "wires": [
+            [
+                "a9f57a0e.eb9cb8"
+            ]
+        ]
+    },
+    {
+        "id": "2c163929.3b3516",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Check DB For UPC",
+        "func": "var found = false;\nvar items = global.get(\"Items\");\nglobal.set(\"UPC\", msg.payload);\n\nfor (i = 0; i < items.length; i++) {\n  if (items[i].upc == msg.payload)\n  {\n\tfound = true;\n\tmsg.topic = \"Select\";\n\tbreak;\n  }\n}\n\nif (found)\n\treturn [null, msg];\nelse\n{\n\tglobal.set(\"Name\", null);\n\tglobal.set(\"Size\", null);\n\treturn [msg, null];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 950,
+        "y": 400,
+        "wires": [
+            [
+                "b2143b5d.ee1698"
+            ],
+            [
+                "42b86ba1.98cb1c"
+            ]
+        ]
+    },
+    {
+        "id": "459d6f39.c084e",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Get",
+        "func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nmsg.queryType=\"Get Item\";\nmsg.topic = SqlString.format(\"SELECT upc, name, have, want, task FROM Items WHERE upc = ?\", [msg.payload]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1410,
+        "y": 680,
+        "wires": [
+            [
+                "59d8440c.042684"
+            ]
+        ]
+    },
+    {
+        "id": "a9f57a0e.eb9cb8",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Add New",
+        "func": "var success = msg.payload;\nvar SqlString = global.get('SqlString');\n\nmsg.queryType = \"Add New Item\";\nmsg.topic = SqlString.format(\n\t\"INSERT INTO Items(name, upc, have, want) VALUES (?, ?, ?, 0)\",\n\t[\n\t\tsuccess === true ? global.get(\"Name\") : \"Unknown Item\",\n\t\tglobal.get(\"UPC\"),\n\t\tglobal.get(\"ScanMode\") === \"Add\" ? 1 : 0\n\t]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1420,
+        "y": 440,
+        "wires": [
+            [
+                "59d8440c.042684"
+            ]
+        ]
+    },
+    {
+        "id": "42b86ba1.98cb1c",
+        "type": "switch",
+        "z": "8c23e2f4.97027",
+        "name": "Scan Mode",
+        "property": "ScanMode",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Add",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Remove",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1150,
+        "y": 440,
+        "wires": [
+            [
+                "cb06a685.13204"
+            ],
+            [
+                "83c19796.86e7"
+            ],
+            [
+                "459d6f39.c084e"
+            ]
+        ]
+    },
+    {
+        "id": "7f6b2149.191988",
+        "type": "uibuilder",
+        "z": "8c23e2f4.97027",
+        "name": "Web HMI",
+        "topic": "",
+        "url": "hmi",
+        "fwdInMessages": false,
+        "allowScripts": false,
+        "allowStyles": false,
+        "copyIndex": true,
+        "showfolder": false,
+        "x": 710,
+        "y": 580,
+        "wires": [
+            [
+                "659ca6d9.406a9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "659ca6d9.406a9",
+        "type": "switch",
+        "z": "8c23e2f4.97027",
+        "name": "Event Type",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ScanUPC",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Refresh",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "IncrementHave",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DecrementHave",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "IncrementWant",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DecrementWant",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "SelectUPC",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Rename",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Delete",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ScanMode",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 10,
+        "x": 870,
+        "y": 580,
+        "wires": [
+            [
+                "2c163929.3b3516"
+            ],
+            [
+                "6a9c1e5c.3ab7e"
+            ],
+            [
+                "cb06a685.13204"
+            ],
+            [
+                "83c19796.86e7"
+            ],
+            [
+                "7a5ad79e.cfcd1"
+            ],
+            [
+                "42317edb.1dc8a"
+            ],
+            [
+                "459d6f39.c084e"
+            ],
+            [
+                "7d2043f2.c9b154"
+            ],
+            [
+                "c87380fc.3e2e78"
+            ],
+            [
+                "f35c8481.31cef"
+            ]
+        ]
+    },
+    {
+        "id": "4d6bab7d.bc5d84",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Replace Item List",
+        "func": "//save data\nglobal.set(\"Items\", msg.payload);\n\nmsg.topic = \"Item List\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 520,
+        "wires": [
+            [
+                "7f6b2149.191988"
+            ]
+        ]
+    },
+    {
+        "id": "57132630.c6e3d",
+        "type": "switch",
+        "z": "8c23e2f4.97027",
+        "name": "",
+        "property": "queryType",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Get All",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Add New Item",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Get Item",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Delete Item",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Update Item",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 230,
+        "y": 600,
+        "wires": [
+            [
+                "4d6bab7d.bc5d84"
+            ],
+            [
+                "c94d09df.968988"
+            ],
+            [
+                "49fc6402.38bbbc"
+            ],
+            [
+                "d4533675.624788"
+            ],
+            [
+                "773cc6f8.69ea4"
+            ]
+        ]
+    },
+    {
+        "id": "c94d09df.968988",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Add New Item To UI",
+        "func": "var items = global.get(\"Items\");\nvar item = {name:global.get(\"Name\") || \"Unknown Item\", upc:global.get(\"UPC\"), have:global.get(\"ScanMode\") === \"Add\" ? 1 : 0, want:0};\nitems.push(item);\nmsg.topic = \"Add New Item\";\nmsg.payload = item;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 560,
+        "wires": [
+            [
+                "7f6b2149.191988"
+            ]
+        ]
+    },
+    {
+        "id": "6a9c1e5c.3ab7e",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Get All",
+        "func": "msg.queryType=\"Get All\";\nmsg.topic=\"SELECT upc, name, have, want, task FROM Items\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1410,
+        "y": 480,
+        "wires": [
+            [
+                "59d8440c.042684"
+            ]
+        ]
+    },
+    {
+        "id": "f35c8481.31cef",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Set Scan Mode",
+        "func": "global.set(\"ScanMode\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 960,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7d2043f2.c9b154",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Rename",
+        "func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload.upc);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].name = msg.payload.name;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET name = ? WHERE upc = ?\", [msg.payload.name, msg.payload.upc]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1420,
+        "y": 720,
+        "wires": [
+            [
+                "59d8440c.042684"
+            ]
+        ]
+    },
+    {
+        "id": "49fc6402.38bbbc",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Update Item In UI",
+        "func": "msg.topic = \"Update Item\";\nmsg.payload = msg.payload[0];//Select the first row (should only be one anyway)\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i] = msg.payload;\n\t\tbreak;\n\t}\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "7f6b2149.191988"
+            ]
+        ]
+    },
+    {
+        "id": "cb06a685.13204",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Increment Have",
+        "func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].have++;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET have = have + 1 WHERE upc = ?\", [msg.payload]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1440,
+        "y": 520,
+        "wires": [
+            [
+                "59d8440c.042684",
+                "ea8de92d.26eb2"
+            ]
+        ]
+    },
+    {
+        "id": "83c19796.86e7",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Decrement Have",
+        "func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].have--;\n\t\tif (items[i].have < 0)\n\t\t\titems[i].have = 0;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET have = CASE WHEN have - 1 < 0 THEN 0 ELSE have - 1 END WHERE upc = ?\", [msg.payload]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1450,
+        "y": 560,
+        "wires": [
+            [
+                "59d8440c.042684",
+                "ea8de92d.26eb2"
+            ]
+        ]
+    },
+    {
+        "id": "7a5ad79e.cfcd1",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Increment Want",
+        "func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].want++;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET want = want + 1 WHERE upc = ?\", [msg.payload]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1440,
+        "y": 600,
+        "wires": [
+            [
+                "59d8440c.042684",
+                "ea8de92d.26eb2"
+            ]
+        ]
+    },
+    {
+        "id": "42317edb.1dc8a",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Decrement Want",
+        "func": "var SqlString = global.get('SqlString');\nglobal.set(\"UPC\", msg.payload);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\titems[i].want--;\n\t\tif (items[i].want < 0)\n\t\t\titems[i].want = 0;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET want = CASE WHEN want - 1 < 0 THEN 0 ELSE want - 1 END WHERE upc = ?\", [msg.payload]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1450,
+        "y": 640,
+        "wires": [
+            [
+                "59d8440c.042684",
+                "ea8de92d.26eb2"
+            ]
+        ]
+    },
+    {
+        "id": "773cc6f8.69ea4",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Get Updated Item",
+        "func": "msg.payload = global.get(\"UPC\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 950,
+        "y": 780,
+        "wires": [
+            [
+                "459d6f39.c084e"
+            ]
+        ]
+    },
+    {
+        "id": "c87380fc.3e2e78",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Delete",
+        "func": "var SqlString = global.get('SqlString');\nvar upc = msg.payload;\nglobal.set(\"UPC\", upc);\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === msg.payload.upc)\n\t{\n\t\tmsg.payload = items[i].task;\n\t\tbreak;\n\t}\n}\n\nglobal.set(\"Items\", items.filter(function(i) { return i.upc !== msg.payload; }));\n\nmsg.queryType=\"Delete Item\";\nmsg.topic = SqlString.format(\"DELETE FROM Items WHERE upc = ?\", [upc]);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1410,
+        "y": 760,
+        "wires": [
+            [
+                "59d8440c.042684",
+                "fb6fc20e.c8bff8"
+            ]
+        ]
+    },
+    {
+        "id": "d4533675.624788",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Delete Item From UI",
+        "func": "msg.topic = \"Delete Item\";\nmsg.payload = global.get(\"UPC\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "7f6b2149.191988"
+            ]
+        ]
+    },
+    {
+        "id": "8b66b46a.3942a8",
+        "type": "html",
+        "z": "b3478ec1.732918",
+        "name": "Separate Columns",
+        "property": "payload",
+        "outproperty": "payload",
+        "tag": "td",
+        "ret": "text",
+        "as": "single",
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "d45c231e.35755"
+            ]
+        ]
+    },
+    {
+        "id": "71e927cb.d812c",
+        "type": "html",
+        "z": "b3478ec1.732918",
+        "name": "Get Rows",
+        "property": "payload",
+        "outproperty": "payload",
+        "tag": "table.data tr",
+        "ret": "html",
+        "as": "multi",
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "8b66b46a.3942a8"
+            ]
+        ]
+    },
+    {
+        "id": "1ac3e5ca.45e27a",
+        "type": "http request",
+        "z": "b3478ec1.732918",
+        "name": "upcdatabase.com",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "78890218.24afac"
+            ]
+        ]
+    },
+    {
+        "id": "aca4a1c.403d06",
+        "type": "function",
+        "z": "b3478ec1.732918",
+        "name": "Construct URL",
+        "func": "msg.url = \"https://upcdatabase.com/item/\" + msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 220,
+        "y": 140,
+        "wires": [
+            [
+                "1ac3e5ca.45e27a"
+            ]
+        ]
+    },
+    {
+        "id": "51712f49.9a97",
+        "type": "link in",
+        "z": "b3478ec1.732918",
+        "name": "UPC",
+        "links": [
+            "b2143b5d.ee1698"
+        ],
+        "x": 95,
+        "y": 140,
+        "wires": [
+            [
+                "aca4a1c.403d06"
+            ]
+        ]
+    },
+    {
+        "id": "42bfd3b6.9c4e74",
+        "type": "link out",
+        "z": "b3478ec1.732918",
+        "name": "Success",
+        "links": [
+            "2d523e31.4d9c3a"
+        ],
+        "x": 1275,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "d45c231e.35755",
+        "type": "function",
+        "z": "b3478ec1.732918",
+        "name": "Parse",
+        "func": "if(msg.payload[0] == \"Description\")\n\tglobal.set(\"Name\", msg.payload[2]);\nif(msg.payload[0] == \"Size/Weight\")\n\tglobal.set(\"Size\", msg.payload[2]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 910,
+        "y": 200,
+        "wires": [
+            [
+                "bbe8932f.6f5c3"
+            ]
+        ]
+    },
+    {
+        "id": "bbe8932f.6f5c3",
+        "type": "join",
+        "z": "b3478ec1.732918",
+        "name": "Wait",
+        "mode": "custom",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "1",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1030,
+        "y": 200,
+        "wires": [
+            [
+                "56cc0e85.53cbb8"
+            ]
+        ]
+    },
+    {
+        "id": "78890218.24afac",
+        "type": "function",
+        "z": "b3478ec1.732918",
+        "name": "Check for Error",
+        "func": "if (msg.responseUrl.includes(\"upcerror\") || msg.responseUrl.includes(\"itemnotfound\"))\n{\n\tmsg.payload = false;\n\treturn [msg, null];\n}\nelse\n\treturn [null, msg];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [
+                "42bfd3b6.9c4e74"
+            ],
+            [
+                "71e927cb.d812c"
+            ]
+        ]
+    },
+    {
+        "id": "56cc0e85.53cbb8",
+        "type": "function",
+        "z": "b3478ec1.732918",
+        "name": "Check Fields",
+        "func": "if (global.get(\"Name\") && global.get(\"Size\"))\n\tmsg.payload = true;\nelse\n\tmsg.payload = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1170,
+        "y": 200,
+        "wires": [
+            [
+                "42bfd3b6.9c4e74"
+            ]
+        ]
+    },
+    {
+        "id": "ea8de92d.26eb2",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Check modified item to see if it needs todoist task",
+        "func": "var items = global.get(\"Items\");\nvar upc = global.get(\"UPC\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === upc)\n\t{\n\t\tif (items[i].task)\n\t\t{\n\t\t\tif (items[i].want > items[i].have)\n\t\t\t{\n\t\t\t\tif (items[i].open)\n\t\t\t\t{\n\t\t\t\t\t//already open\n\t\t\t\t\treturn[null,null,null];\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\t//reopen\n\t\t\t\t\tmsg.payload = items[i].task;\n\t\t\t\t\titems[i].open = true;\n\t\t\t\t\treturn[null,msg,null];\n\t\t\t\t}\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\tif (items[i].open)\n\t\t\t\t{\n\t\t\t\t\t//close\n\t\t\t\t\tmsg.payload = items[i].task;\n\t\t\t\t\titems[i].open = false;\n\t\t\t\t\treturn[null,null,msg];\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\t//already closed\n\t\t\t\t\treturn[null,null,null];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\telse\n\t\t{\n\t\t\tif (items[i].want > items[i].have)\n\t\t\t{\n\t\t\t\t//create new task\n\t\t\t\titems[i].open = true;\n\t\t\t\tmsg.payload = {};\n\t\t\t\tmsg.payload.content = items[i].name;\n\t\t\t\treturn[msg,null,null];\n\t\t\t}\n\t\t\telse\n\t\t\t{\n\t\t\t\t//doesn't need a task\n\t\t\t\treturn[null,null,null];\n\t\t\t}\n\t\t}\n\t\tbreak;\n\t}\n}\n\nreturn [null,null,null];",
+        "outputs": 3,
+        "noerr": 0,
+        "x": 1890,
+        "y": 480,
+        "wires": [
+            [
+                "5044294f.c8767"
+            ],
+            [
+                "8e7615c0.d68158"
+            ],
+            [
+                "6ac0388b.a1adc"
+            ]
+        ]
+    },
+    {
+        "id": "5044294f.c8767",
+        "type": "link out",
+        "z": "8c23e2f4.97027",
+        "name": "CreateTodoistTask",
+        "links": [
+            "b9d7b372.d761b"
+        ],
+        "x": 2135,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "8e7615c0.d68158",
+        "type": "link out",
+        "z": "8c23e2f4.97027",
+        "name": "ReopenTodoistTask",
+        "links": [
+            "409ac839.3916f"
+        ],
+        "x": 2135,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f5aec266.950a4",
+        "type": "link in",
+        "z": "8c23e2f4.97027",
+        "name": "CreatedTodoistTask",
+        "links": [
+            "c42eee5e.ad082"
+        ],
+        "x": 1275,
+        "y": 800,
+        "wires": [
+            [
+                "8569005f.5aaf58"
+            ]
+        ]
+    },
+    {
+        "id": "8569005f.5aaf58",
+        "type": "function",
+        "z": "8c23e2f4.97027",
+        "name": "Setup Set Task",
+        "func": "var SqlString = global.get('SqlString');\nvar upc = global.get(\"UPC\");\n\nvar items = global.get(\"Items\");\nfor(var i = 0; i < items.length; i++)\n{\n\tif (items[i].upc === upc)\n\t{\n\t\titems[i].task = msg.payload.id;\n\t\tbreak;\n\t}\n}\n\nmsg.queryType=\"Update Item\";\nmsg.topic = SqlString.format(\"UPDATE Items SET task = ? WHERE upc = ?\", [msg.payload.id, upc]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1420,
+        "y": 800,
+        "wires": [
+            [
+                "59d8440c.042684"
+            ]
+        ]
+    },
+    {
+        "id": "6ac0388b.a1adc",
+        "type": "link out",
+        "z": "8c23e2f4.97027",
+        "name": "CloseTodoistTask",
+        "links": [
+            "690a63f3.611694"
+        ],
+        "x": 2135,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f24b6423.5453d8",
+        "type": "link out",
+        "z": "8c23e2f4.97027",
+        "name": "DBOut",
+        "links": [
+            "4a9f7f8e.9401"
+        ],
+        "x": 1895,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "4a9f7f8e.9401",
+        "type": "link in",
+        "z": "8c23e2f4.97027",
+        "name": "FromDB",
+        "links": [
+            "f24b6423.5453d8"
+        ],
+        "x": 115,
+        "y": 600,
+        "wires": [
+            [
+                "57132630.c6e3d"
+            ]
+        ]
+    },
+    {
+        "id": "690a63f3.611694",
+        "type": "link in",
+        "z": "8d58cb0a.3ef3",
+        "name": "Close",
+        "links": [
+            "6ac0388b.a1adc"
+        ],
+        "x": 155,
+        "y": 260,
+        "wires": [
+            [
+                "b7691cb1.8484e8"
+            ]
+        ]
+    },
+    {
+        "id": "23367ffa.e63978",
+        "type": "link out",
+        "z": "8d58cb0a.3ef3",
+        "name": "Close",
+        "links": [],
+        "x": 475,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b7691cb1.8484e8",
+        "type": "function",
+        "z": "8d58cb0a.3ef3",
+        "name": "",
+        "func": "msg.url = \"https://api.todoist.com/rest/v1/tasks/\"+msg.topic+\"/close\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "888fcdda.142898"
+            ]
+        ]
+    },
+    {
+        "id": "888fcdda.142898",
+        "type": "http request",
+        "z": "8d58cb0a.3ef3",
+        "name": "Close",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "23367ffa.e63978"
+            ]
+        ]
+    },
+    {
+        "id": "67e30456.2db6d4",
+        "type": "link in",
+        "z": "8d58cb0a.3ef3",
+        "name": "Delete",
+        "links": [
+            "fb6fc20e.c8bff8"
+        ],
+        "x": 155,
+        "y": 300,
+        "wires": [
+            [
+                "b91d1fb0.c1435"
+            ]
+        ]
+    },
+    {
+        "id": "cf55c142.69179",
+        "type": "link out",
+        "z": "8d58cb0a.3ef3",
+        "name": "Delete",
+        "links": [],
+        "x": 475,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b91d1fb0.c1435",
+        "type": "function",
+        "z": "8d58cb0a.3ef3",
+        "name": "",
+        "func": "msg.url = \"https://api.todoist.com/rest/v1/tasks/\"+msg.payload\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "cc11a28a.3e2188"
+            ]
+        ]
+    },
+    {
+        "id": "cc11a28a.3e2188",
+        "type": "http request",
+        "z": "8d58cb0a.3ef3",
+        "name": "Delete",
+        "method": "DELETE",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "bearer",
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "cf55c142.69179"
+            ]
+        ]
+    },
+    {
+        "id": "fb6fc20e.c8bff8",
+        "type": "link out",
+        "z": "8c23e2f4.97027",
+        "name": "DeleteTask",
+        "links": [
+            "67e30456.2db6d4"
+        ],
+        "x": 1595,
+        "y": 760,
+        "wires": []
+    }
 ]
-
